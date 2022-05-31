@@ -8,16 +8,15 @@ const squares = 546
 let sliderValue = 70
 let range = 360
 
-const createSquare = (speed) => {
+const createSquare = speed => {
 	box.innerHTML = ''
-    for (let i = 0; i < squares; i++) {
+	for (let i = 0; i < squares; i++) {
 		const square = document.createElement('div')
 		square.classList.add('square')
-        square.style.transitionDuration = speed
+		square.style.transitionDuration = speed
 
-        
-        square.addEventListener('mouseover', () => setColor(square) )
-        square.addEventListener('mouseout', () => removeColor(square) )
+		square.addEventListener('mouseover', () => setColor(square))
+		square.addEventListener('mouseout', () => removeColor(square))
 
 		box.appendChild(square)
 	}
@@ -29,35 +28,33 @@ const setColor = square => {
 	if (range === 360) {
 		h = Math.floor(Math.random() * 360)
 	} else {
-        h = Math.floor(Math.random() * 60) + range
-    }
+		h = Math.floor(Math.random() * 60) + range
+	}
 
-    const s = slider.value + '%'
-    const l = '50%'
+	const s = slider.value + '%'
+	const l = '50%'
 
-    square.style.backgroundColor = `hsl(${h},${s},${l})`
+	square.style.backgroundColor = `hsl(${h},${s},${l})`
 }
 
-
-const removeColor = (square) => {
-    square.style.backgroundColor = `transparent`
+const removeColor = square => {
+	square.style.backgroundColor = `transparent`
 }
 
-function handleSpeed () {
-    const newSpeed = this.dataset.speed + 's'
-     createSquare(newSpeed)    
+function handleSpeed() {
+	const newSpeed = this.dataset.speed + 's'
+	createSquare(newSpeed)
 }
 
-function handleColorRange () {
-    range = parseInt(this.dataset.colorRange)   
-    // colorRange = data-color-range
- 
+function handleColorRange(e) {
+	range = parseInt(this.dataset.colorRange)
+	
+	// colorRange = data-color-range
 }
 
-const showSlidetInfo = (square) => {
-    sliderValue = slider.value
-    sliderInfo.textContent = slider.value
-    
+const showSlidetInfo = square => {
+	sliderValue = slider.value
+	sliderInfo.textContent = slider.value
 }
 
 speedBtns.forEach(btn => btn.addEventListener('click', handleSpeed))
